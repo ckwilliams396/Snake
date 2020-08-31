@@ -4,19 +4,33 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author ckwilliams396
+ * The Snake class is designed as part of the Snake game. It handles the length of the snake. 
+ * The body of the snake is an ArrayList of Rectangle objects. 
+ */
 public class Snake {
 
 	public ArrayList<Rectangle> body = new ArrayList<>();
 	private Direction direction = Direction.UP;
 	
-	
+	/**
+	 * Creates a new snake object with the head at position x and y.
+	 * @param x The X coordinate of the head of the snake.
+	 * @param y The Y coordinate of the head of the snake.
+	 */
 	public Snake(int x, int y){
 		for(int i = 0; i < 80; i++){
 			body.add(new Rectangle(x,y+i,20,20));
 		}
 	}
 	
+	/**
+	 * Increases the number of rectangles in the snake's body by one at the position (x,y).
+	 * @param x The X coordinate of the new rectangle.
+	 * @param y The Y coordinate of the new rectangle.
+	 */
 //gets the second from the last rect in the body. keeps getting out of bounds exception...	
 	public void grow(int x, int y){
 		int end = body.size()-1;
@@ -32,23 +46,29 @@ public class Snake {
 		System.out.println(body.size());
 	}
 	
+	/**
+	 * Draws all the rectangles in the body ArrayList.
+	 * @param g Graphics object for drawing.
+	 */
 	public void draw(Graphics g){
 		Graphics2D g1 = (Graphics2D)g;
 		for(int i = 0; i < body.size() - 1; i++){
 			g1.fill(body.get(i));
 		}
 	}
-	
+	/**
+	 * Sets the direction field of the snake object
+	 * @param d Direction Enum
+	 */
 	public void setDirection(Direction d){
 		direction = d;
 	}
-	
+	/**
+	 * Returns a Direction Enum
+	 * @return A Direction Enum
+	 */
 	public Direction getDirection(){
 		return direction;
 	}
 	
-	
-	public String toString(Point p){
-		return "("+p.x+" , "+ p.y+")";
-	}
 }

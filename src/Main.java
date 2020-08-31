@@ -11,7 +11,12 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+/**
+ * 
+ * @author ckwilliams369
+ * This is the class that ties all the Snake, Bait, and Game classes together. It is responsible all the UI for the game.
+ * It implements an ActionListener to use a time to move the snake. The KeyListener is to control the snake. The MouseListener is to gain focus on the window so the KeyListener will work.
+ */
 public class Main extends JPanel implements ActionListener, KeyListener, MouseListener{
 	
 	public Timer timer = new Timer(10, this);
@@ -81,7 +86,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for(int i = game.snake.body.size()-1; i > 0; i--){
