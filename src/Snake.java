@@ -28,22 +28,20 @@ public class Snake {
 	
 	/**
 	 * Increases the number of rectangles in the snake's body by one at the position (x,y).
-	 * @param x The X coordinate of the new rectangle.
-	 * @param y The Y coordinate of the new rectangle.
-	 */
-//gets the second from the last rect in the body. keeps getting out of bounds exception...	
+	 * @param x The X coordinate of the last rectangle in the body ArrayList.
+	 * @param y The Y coordinate of the last rectangle in the body ArrayList.
+	 */	
 	public void grow(int x, int y){
 		int end = body.size()-1;
-		if(body.get(end-2).x == x+1){
+		if(body.get(end-1).x == x+1){
 			body.add(new Rectangle(x-1,y,20,20));
-		}else if(body.get(end-2).x == x-1){
+		}else if(body.get(end-1).x == x-1){
 			body.add(new Rectangle(x+1,y,20,20));
-		}else if(body.get(end-2).y == y+1){
+		}else if(body.get(end-1).y == y+1){
 			body.add(new Rectangle(x,y-1,20,20));
 		}else{
 			body.add(new Rectangle(x,y+1,20,20));
 		}
-		System.out.println(body.size());
 	}
 	
 	/**

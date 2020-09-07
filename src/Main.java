@@ -75,6 +75,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 			velY = 1;
 			game.snake.setDirection(Direction.DOWN);
 		}
+		//TODO figure out how to move the gameover to the actionListener...
 		if(game.checkForGameOver(prevDir, game.snake.getDirection(), getWidth(), getHeight())){
 			timer.stop();
 			game.showGameOverMessage();
@@ -96,10 +97,10 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 		game.snake.body.get(0).y += velY;
 		game.snake.body.get(0).x += velX;
 		if(game.snake.body.get(0).intersects(game.bait.pos)){
-			System.out.println("Yum!");
-			int end = game.snake.body.size();
-			game.moveBait(rand.nextInt(560), rand.nextInt(560));
-			game.grow(game.snake.body.get(end).x, game.snake.body.get(end).y);
+			for(int i = 0; i < 40; i++){
+				game.moveBait(rand.nextInt(560), rand.nextInt(560));
+				game.grow();
+			}
 		}
 		repaint();
 
