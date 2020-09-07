@@ -15,7 +15,7 @@ public class Game {
 	 */
 	public Game(){
 		snake = new Snake(400,400);
-		bait = new Bait(50, 50);
+		bait = new Bait(400, 350);
 	}
 	
 	/**
@@ -63,17 +63,16 @@ public class Game {
 	 * @param y The new y coordinate of the bait object.
 	 */
 	public void moveBait(int x, int y){
-		System.out.println("("+x+" ,"+y+" )");
+		//System.out.println("("+x+" ,"+y+" )");
 		bait.moveBait(x, y);
 	}
 	
 	/**
 	 * Calls the grow method in the Snake class.
-	 * @param x The x coordinate of a new rectangle.
-	 * @param y The y coordinate of a new rectangle.
 	 */
-	public void grow(int x, int y){
-		snake.grow(x, y);
+	public void grow(){
+		int end = snake.body.size() - 1;
+		snake.grow(snake.body.get(end).x, snake.body.get(end).y);
 	}
 	
 }
