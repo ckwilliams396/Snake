@@ -1,3 +1,7 @@
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -9,13 +13,17 @@ public class Game {
 	
 	public Snake snake;
 	public Bait bait; //Redo with random int to start randomly
-
+	public Random rand;
+	public final int baitSize;
+	
 	/**
 	 * Creates a new instance of snake and bait.
 	 */
 	public Game(){
 		snake = new Snake(400,400);
-		bait = new Bait(400, 350);
+		bait = new Bait(300, 300);
+		baitSize = bait.getBaitSize();
+		rand = new Random();
 	}
 	
 	/**
@@ -64,7 +72,24 @@ public class Game {
 	 */
 	public void moveBait(int x, int y){
 		//System.out.println("("+x+" ,"+y+" )");
-		bait.moveBait(x, y);
+		ArrayList<Rectangle> body = snake.body;
+		boolean broke = false;
+		for(int i = 0; i < snake.body.size(); i++) {
+			if (body.get(i).contains(x,y) || 
+					body.get(i).contains(x+baitSize,y+baitSize) ||
+					body.get(i).contains(x,y+baitSize) ||
+					body.get(i).contains(x+baitSize,y)){
+				System.out.println("try again...");
+				broke = true;
+				break;
+			}
+		}
+		if(broke){
+			System.out.println("trying again");
+			moveBait(rand.nextInt(560),rand.nextInt(560));
+		}else{
+			bait.moveBait(x, y);
+		}
 	}
 	
 	/**

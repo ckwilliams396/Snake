@@ -10,6 +10,7 @@ import java.awt.Rectangle;
  */
 public class Bait {
 	public Rectangle pos;
+	private final int baitSize = 20;
 	
 	/**
 	 * Creates a rectangle at position x and y with a width and height of 20.
@@ -17,7 +18,7 @@ public class Bait {
 	 * @param y The y position of the rectangle.
 	 */
 	public Bait(int x, int y){
-		pos = new Rectangle(x,y,20,20);
+		pos = new Rectangle(x,y,baitSize,baitSize);
 	}
 	
 	/**
@@ -30,6 +31,14 @@ public class Bait {
 	}
 	
 	/**
+	 * returns the size of the bait
+	 * @return size of the bait
+	 */
+	public int getBaitSize(){
+		return baitSize;
+	}
+	
+	/**
 	 * Draws the rectangle.
 	 * @param g A Graphics object used for drawing. 
 	 */
@@ -37,5 +46,6 @@ public class Bait {
 		Graphics2D g1 = (Graphics2D)g;
 		g1.fill(pos);
 	}
+
 	
 }
