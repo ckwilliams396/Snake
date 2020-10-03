@@ -14,6 +14,7 @@ public class Snake {
 
 	public ArrayList<Rectangle> body = new ArrayList<>();
 	private Direction direction = Direction.UP;
+	private final int scaleSize = 20;  
 	
 	/**
 	 * Creates a new snake object with the head at position x and y.
@@ -22,7 +23,7 @@ public class Snake {
 	 */
 	public Snake(int x, int y){
 		for(int i = 0; i < 80; i++){
-			body.add(new Rectangle(x,y+i,20,20));
+			body.add(new Rectangle(x,y+i,scaleSize,scaleSize));
 		}
 	}
 	
@@ -34,13 +35,13 @@ public class Snake {
 	public void grow(int x, int y){
 		int end = body.size()-1;
 		if(body.get(end-1).x == x+1){
-			body.add(new Rectangle(x-1,y,20,20));
+			body.add(new Rectangle(x-1,y,scaleSize,scaleSize));
 		}else if(body.get(end-1).x == x-1){
-			body.add(new Rectangle(x+1,y,20,20));
+			body.add(new Rectangle(x+1,y,scaleSize,scaleSize));
 		}else if(body.get(end-1).y == y+1){
-			body.add(new Rectangle(x,y-1,20,20));
+			body.add(new Rectangle(x,y-1,scaleSize,scaleSize));
 		}else{
-			body.add(new Rectangle(x,y+1,20,20));
+			body.add(new Rectangle(x,y+1,scaleSize,scaleSize));
 		}
 	}
 	

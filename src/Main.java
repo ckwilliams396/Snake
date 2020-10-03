@@ -19,11 +19,13 @@ import javax.swing.Timer;
  */
 public class Main extends JPanel implements ActionListener, KeyListener, MouseListener{
 	
-	public Timer timer = new Timer(10, this);
+	private Timer timer = new Timer(10, this);
 	private Game game = new Game();
-	public int velX = 0;
-	public int velY = -1;
+	private int velX = 0;
+	private int velY = -1;
 	private Random rand;
+	private int w;
+	private int h;
 
 	public Main(){
 		rand = new Random();
@@ -33,8 +35,8 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	@Override
 	public void paintComponent(Graphics g){
-		int w = getWidth();
-		int h = getHeight();
+		w = getWidth();
+		h = getHeight();
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, w, h);
 		g.setColor(Color.RED);
@@ -98,9 +100,12 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 		game.snake.body.get(0).x += velX;
 		if(game.snake.body.get(0).intersects(game.bait.pos)){
 			for(int i = 0; i < 40; i++){
-				game.moveBait(rand.nextInt(560), rand.nextInt(560));
 				game.grow();
 			}
+			int randX = rand.nextInt(w - game.baitSize);
+			int randY = rand.nextInt(h - game.baitSize);
+			System.out.println("(" + randX + "," + randY + ")");
+			game.moveBait(randX, randY);
 		}
 		repaint();
 
