@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Snake {
 
 	public ArrayList<Rectangle> body = new ArrayList<>();
-	private Direction direction = Direction.UP;
 	private final int scaleSize = 20;  
 	
 	/**
@@ -55,19 +54,10 @@ public class Snake {
 			g1.fill(body.get(i));
 		}
 	}
-	/**
-	 * Sets the direction field of the snake object
-	 * @param d Direction Enum
-	 */
-	public void setDirection(Direction d){
-		direction = d;
+	
+	public int getScaleSize(){
+		return scaleSize;
 	}
-	/**
-	 * Returns a Direction Enum
-	 * @return A Direction Enum
-	 */
-	public Direction getDirection(){
-		return direction;
-	}
+
 	
 }
