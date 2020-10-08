@@ -53,10 +53,12 @@ public class Game {
 	}
 	
 	/**
-	 * A JOptionPane that lets the player know a game over has occurred.
+	 * A JOptionPane that lets the player know a game over has occurred and asks if the player wants to play again.
+	 * @return Returns the option the player chose. 
 	 */
-	public void showGameOverMessage(){
-		JOptionPane.showMessageDialog(null,"Game Over", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+	public int showGameOverMessage(){
+		return JOptionPane.showConfirmDialog(null, "Would you like To play again?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+
 	}
 	
 	/**
