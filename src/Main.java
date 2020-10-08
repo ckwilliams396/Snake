@@ -58,29 +58,19 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		Direction prevDir = game.snake.getDirection();
 		int c = e.getKeyCode();
 		if(c == KeyEvent.VK_LEFT){
 			velX = -1;
 			velY = 0;
-			game.snake.setDirection(Direction.LEFT);
 		}else if(c == KeyEvent.VK_RIGHT){
 			velX = 1;
 			velY = 0;
-			game.snake.setDirection(Direction.RIGHT);
 		}else if(c == KeyEvent.VK_UP){
 			velX = 0;
 			velY = -1;
-			game.snake.setDirection(Direction.UP);
 		}else if(c == KeyEvent.VK_DOWN){
 			velX = 0;
 			velY = 1;
-			game.snake.setDirection(Direction.DOWN);
-		}
-		//TODO figure out how to move the gameover to the actionListener...
-		if(game.checkForGameOver(prevDir, game.snake.getDirection(), getWidth(), getHeight())){
-			timer.stop();
-			game.showGameOverMessage();
 		}
 	}
 
@@ -92,6 +82,10 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(game.checkForGameOver(getWidth(), getHeight())){
+			timer.stop();
+			game.showGameOverMessage();
+		}
 		for(int i = game.snake.body.size()-1; i > 0; i--){
 			game.snake.body.get(i).x = game.snake.body.get(i-1).x;
 			game.snake.body.get(i).y = game.snake.body.get(i-1).y;

@@ -15,7 +15,7 @@ public class Game {
 	public Bait bait; //Redo with random int to start randomly
 	public Random rand;
 	public final int baitSize;
-	
+	private final int scaleSize;
 	/**
 	 * Creates a new instance of snake and bait.
 	 */
@@ -23,6 +23,7 @@ public class Game {
 		snake = new Snake(400,400);
 		bait = new Bait(300, 300);
 		baitSize = bait.getBaitSize();
+		scaleSize = snake.getScaleSize();
 		rand = new Random();
 	}
 	
@@ -35,25 +36,18 @@ public class Game {
 	 * @param h The height of the window.
 	 * @return Returns a boolean value, true if a game over occurs else returns false.
 	 */
-	public boolean checkForGameOver(Direction prev, Direction curr, int w, int h){
+	public boolean checkForGameOver(int w, int h){
 		boolean gameover = false;
-		if(prev == Direction.UP && curr == Direction.DOWN){
-			gameover = true;
-		}else if(prev == Direction.DOWN && curr == Direction.UP){
-			gameover = true;
-		}else if(prev == Direction.RIGHT && curr == Direction.LEFT){
-			gameover = true;
-		}else if( prev == Direction.LEFT && curr == Direction.RIGHT){
-			gameover = true;
-		}
-		if(snake.body.get(0).y < 0 || snake.body.get(0).y+20 > h){
+		if(snake.body.get(0).y < 0 || snake.body.get(0).y+scaleSize > h){
 			return true;
-		}else if(snake.body.get(0).x < 0 || snake.body.get(0).x+20 > w){
+		}else if(snake.body.get(0).x < 0 || snake.body.get(0).x+scaleSize > w){
 			return true;
 		}
-		for(int i = 1; i < snake.body.size() - 1; i++){
-			//TODO if the head is equal to any part of the body return true
-			//then break
+		for(int i = 40; i < snake.body.size() - 1; i++){
+			if(snake.body.get(0).intersects(snake.body.get(i))){
+				gameover = true;
+				break;
+			}
 		}
 		return gameover;
 	}
@@ -85,7 +79,6 @@ public class Game {
 			}
 		}
 		if(broke){
-			System.out.println("trying again");
 			moveBait(rand.nextInt(560),rand.nextInt(560));
 		}else{
 			bait.moveBait(x, y);
