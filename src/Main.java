@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 /**
@@ -84,7 +85,14 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 	public void actionPerformed(ActionEvent e) {
 		if(game.checkForGameOver(getWidth(), getHeight())){
 			timer.stop();
-			game.showGameOverMessage();
+			if(game.showGameOverMessage() == JOptionPane.YES_OPTION){
+				game = new Game();
+				velX = 0;
+				velY = -1;
+			}
+			else{
+				System.exit(0);
+			}
 		}
 		for(int i = game.snake.body.size()-1; i > 0; i--){
 			game.snake.body.get(i).x = game.snake.body.get(i-1).x;
