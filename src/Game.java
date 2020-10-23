@@ -16,6 +16,7 @@ public class Game {
 	public Random rand;
 	public final int baitSize;
 	private final int scaleSize;
+	private int points;
 	/**
 	 * Creates a new instance of snake and bait.
 	 */
@@ -25,6 +26,7 @@ public class Game {
 		baitSize = bait.getBaitSize();
 		scaleSize = snake.getScaleSize();
 		rand = new Random();
+		points = 0;
 	}
 	
 	/**
@@ -67,7 +69,6 @@ public class Game {
 	 * @param y The new y coordinate of the bait object.
 	 */
 	public void moveBait(int x, int y){
-		//System.out.println("("+x+" ,"+y+" )");
 		ArrayList<Rectangle> body = snake.body;
 		boolean broke = false;
 		for(int i = 0; i < snake.body.size(); i++) {
@@ -75,7 +76,6 @@ public class Game {
 					body.get(i).contains(x+baitSize,y+baitSize) ||
 					body.get(i).contains(x,y+baitSize) ||
 					body.get(i).contains(x+baitSize,y)){
-				System.out.println("try again...");
 				broke = true;
 				break;
 			}
@@ -84,6 +84,7 @@ public class Game {
 			moveBait(rand.nextInt(560),rand.nextInt(560));
 		}else{
 			bait.moveBait(x, y);
+			points += 10;
 		}
 	}
 	
@@ -93,6 +94,9 @@ public class Game {
 	public void grow(){
 		int end = snake.body.size() - 1;
 		snake.grow(snake.body.get(end).x, snake.body.get(end).y);
+	}
+	public int getPoints() {
+		return points;
 	}
 	
 }
