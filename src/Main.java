@@ -21,7 +21,7 @@ import javax.swing.Timer;
  */
 public class Main extends JPanel implements ActionListener, KeyListener, MouseListener{
 	
-	private Timer timer = new Timer(10, this);
+	private Timer timer;
 	private Game game = new Game();
 	private int velX = 0;
 	private int velY = -1;
@@ -29,12 +29,14 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 	private int w;
 	private int h;
 	private static JLabel points;
-
+	private int delay = 10;
+	
 	public Main(){
 		rand = new Random();
 		addKeyListener(this);
 		addMouseListener(this);
 		points = new JLabel("score: 0");
+		timer = new Timer(delay, this);
 	}
 	
 	@Override
@@ -94,6 +96,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 				velX = 0;
 				velY = -1;
 				points.setText("score: " + game.getPoints());
+				delay = 10;
 			}
 			else{
 				System.exit(0);
@@ -112,7 +115,12 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 			int randX = rand.nextInt(w - game.baitSize);
 			int randY = rand.nextInt(h - game.baitSize);
 			game.moveBait(randX, randY);
-			points.setText("score: " + game.getPoints());
+			int score = game.getPoints();
+			points.setText("score: " + score);
+			if(score%250 == 0 && delay > 1) {
+				delay -= 1;
+				timer.setDelay(delay);
+			}
 		}
 		repaint();
 
