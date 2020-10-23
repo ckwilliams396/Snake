@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,18 +28,20 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 	private Random rand;
 	private int w;
 	private int h;
+	private static JLabel points;
 
 	public Main(){
 		rand = new Random();
 		addKeyListener(this);
-		addMouseListener(this);		
+		addMouseListener(this);
+		points = new JLabel("score: 0");
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		w = getWidth();
 		h = getHeight();
-		g.setColor(Color.GRAY);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, w, h);
 		g.setColor(Color.RED);
 		game.snake.draw(g);
@@ -54,6 +57,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 		window.setSize(600, 600);
 		window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.add(points);
 		
 	}
 
@@ -89,6 +93,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 				game = new Game();
 				velX = 0;
 				velY = -1;
+				points.setText("score: " + game.getPoints());
 			}
 			else{
 				System.exit(0);
@@ -106,8 +111,8 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseLi
 			}
 			int randX = rand.nextInt(w - game.baitSize);
 			int randY = rand.nextInt(h - game.baitSize);
-			System.out.println("(" + randX + "," + randY + ")");
 			game.moveBait(randX, randY);
+			points.setText("score: " + game.getPoints());
 		}
 		repaint();
 
